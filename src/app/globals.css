@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
+/* OH ESTUDIO brand (Manual de marca, 2026). Proportions: marfil/white 45% as the base, azul vívido 25%
+   as identity and headlines, azul noche 15% for reading text and depth, azul grisáceo 10% as support,
+   verde amarillento 5% only for details: numbering, markers and call-outs. */
+@theme {
+  --color-azul: #123BFF;    /* azul vívido · identidad, titulares, acción */
+  --color-noche: #232A5B;   /* azul noche · texto de lectura, fondos profundos */
+  --color-marfil: #F0EDE7;  /* marfil · base */
+  --color-gris: #C7D1DD;    /* azul grisáceo · apoyo */
+  --color-verde: #C0DF7A;   /* verde amarillento · numeraciones, marcadores, estados */
+  --color-blanco: #FFFFFF;
+
+  /* Inter structures the information; Krub (italic) is the counterpoint for subtitles and highlighted words */
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-accent: var(--font-krub), "Krub", system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --nav-h: 64px;
+  color-scheme: light;
+}
+@media (min-width: 768px) {
+  :root { --nav-h: 84px; }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: var(--color-marfil);
+  -webkit-text-size-adjust: 100%;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+
+body {
+  background: var(--color-marfil);
+  color: var(--color-noche);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::selection { background: var(--color-verde); color: var(--color-noche); }
+
+:focus-visible {
+  outline: 2px solid var(--color-azul);
+  outline-offset: 3px;
+}
+
+.stage-canvas {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out-soft), transform 0.6s var(--ease-out-soft);
+  transform-origin: 50% 50%;
+}
+
+/* ---- brand resources (Manual · Recursos gráficos): one or two per composition ---- */
+@layer components {
+
+  /* Etiqueta: Inter SemiBold, capitals, +30% tracking */
+  .label {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* Barra vertical: marks the start of titles and sections, in the title's colour */
+  .bar {
+    position: relative;
+    padding-left: 0.42em;
+  }
+  .bar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.16em;
+    bottom: 0.1em;
+    width: max(3px, 0.055em);
+    background: currentColor;
+  }
+
+  /* Krub italic: the highlighted word of a headline, subtitles and quotes */
+  .accent {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Numeración circular: orders sections, steps and lists */
+  .num {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 999px;
+    background: var(--color-verde);
+    color: var(--color-noche);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  /* Punta: bullet and direction sign, the container's silhouette */
+  .punta {
+    display: inline-block;
+    flex: none;
+    width: 0.6em;
+    height: 0.7em;
+    background: currentColor;
+    -webkit-mask: url(/brand/container.png) center / contain no-repeat;
+    mask: url(/brand/container.png) center / contain no-repeat;
+  }
+
+  /* Contenedor: the symbol's silhouette as a frame for images */
+  .contenedor {
+    aspect-ratio: 439 / 512;
+    -webkit-mask: url(/brand/container.png) center / contain no-repeat;
+    mask: url(/brand/container.png) center / contain no-repeat;
+  }
+
+  /* Píldora: rounded container for data, buttons and tags */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    border-radius: 999px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Reveal-on-scroll for regular content: transform + opacity only (compositor-friendly) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease-out-soft), transform 0.9s var(--ease-out-soft);
 }
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .stage-canvas { transition: none; }
+}
+
+.intro-skip .intro-curtain { display: none; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
