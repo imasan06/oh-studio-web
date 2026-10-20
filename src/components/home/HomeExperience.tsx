@@ -31,10 +31,8 @@ const T = {
   footer: [0.03, 0.2] as const,
   bar: [0.54, 0.62] as const,
   cards: 0.53,
-  route: [0.58, 0.72] as const,
   hold: 0.82,                     // where "Proyectos" lands: the settled city
 };
-const ROUTE = [0, 1, 5, 4, 3, 2];
 // card offsets from each roof, in frame px (desktop renders), from the prototype
 const CARD_OFF: [number, number][] = [[200, 110], [-110, -40], [-170, 50], [-200, 60], [170, 60], [60, -50]];
 
@@ -75,7 +73,6 @@ export default function HomeExperience({ lang, t, items }: Props) {
   const win = useRef<WindowLayout | null>(null);
   const footer = useRef<HTMLDivElement>(null);
   const overlay = useRef<HTMLDivElement>(null);
-  const route = useRef<SVGPolylineElement>(null);
   const bar = useRef<HTMLDivElement>(null);
   const hint = useRef<HTMLParagraphElement>(null);
   const cards = useRef<(HTMLElement | null)[]>([]);
@@ -194,20 +191,6 @@ export default function HomeExperience({ lang, t, items }: Props) {
       const dot = dots.current[i];
       if (dot) { dot.setAttribute('cx', `${rx}`); dot.setAttribute('cy', `${ry}`); dot.setAttribute('r', `${Math.max(0, 5 * show)}`); }
     });
-    // dashed route between the projects, drawn progressively
-    const rp = reduced ? (q >= 1 ? 1 : 0) : seg(q, T.route);
-    if (route.current) {
-      const P = ROUTE.map(i => R[i]);
-      let total = 0; const segs: number[] = [];
-      for (let k = 0; k < P.length - 1; k++) { const l = Math.hypot(P[k + 1][0] - P[k][0], P[k + 1][1] - P[k][1]); segs.push(l); total += l; }
-      let left = total * rp; const out = [P[0]];
-      for (let k = 0; k < segs.length && left > 0; k++) {
-        const u = Math.min(1, left / segs[k]);
-        out.push([P[k][0] + (P[k + 1][0] - P[k][0]) * u, P[k][1] + (P[k + 1][1] - P[k][1]) * u]);
-        left -= segs[k];
-      }
-      route.current.setAttribute('points', rp > 0 ? out.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ') : '');
-    }
   }, [city, portrait, items, variant]);
   useLayoutEffect(() => { updateRef.current = update; }, [update]);
 
@@ -391,10 +374,9 @@ export default function HomeExperience({ lang, t, items }: Props) {
         </div>
 
 
-        {/* city: cards, route and project list */}
+        {/* city: cards and project list */}
         <div ref={overlay} className="absolute inset-0" style={{ pointerEvents: 'none' }}>
           <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
-            <polyline ref={route} fill="none" stroke="#123BFF" strokeWidth={1.5} strokeDasharray="4 6" strokeLinejoin="round" />
             {!portrait && items.map((_, i) => (
               <g key={i}>
                 <line ref={el => { lines.current[i] = el; }} stroke="#232A5B" strokeWidth={1} />

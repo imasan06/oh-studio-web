@@ -19,7 +19,7 @@ export default function ProjectDetail({ lang, project: p, next, t }: Props) {
           <div data-reveal><Gallery items={p.gallery} lang={lang} label={t.gallery} /></div>
           <div className="flex flex-col gap-6 md:gap-7">
             <p data-reveal className="label text-azul">{p.kind[lang]} · {p.year}</p>
-            <h2 data-reveal className="bar text-[clamp(48px,4.8vw,84px)] font-bold leading-[0.98] tracking-[-0.03em] text-azul">{p.name}</h2>
+            <h2 data-reveal className="text-[clamp(48px,4.8vw,84px)] font-bold leading-[0.98] tracking-[-0.03em] text-azul">{p.name}</h2>
             <p data-reveal className="accent text-[22px] leading-[1.35] text-noche md:text-[25px]">{p.summary[lang]}</p>
             <p data-reveal className="text-[18px] leading-[1.5] text-pretty md:text-[19px]">{p.description[lang]}</p>
             {/* ficha: ubicación · superficie · estado · equipo */}

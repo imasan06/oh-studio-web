@@ -48,6 +48,35 @@ const es = {
     highlight: 'Desde la idea hasta la obra',
     stat: '120+',
     statLabel: 'proyectos entregados',
+    // bento: the panel that slides up over each photo on hover
+    gallery: {
+      title: 'GALLERY',
+      house: {
+        name: 'Casa en ladera', kind: 'Arquitectura · Vivienda',
+        body: 'Una cubierta de concreto que nace del terreno, protege la escalera y se abre hacia el valle.',
+        specs: [['Niveles', '2'], ['Materiales', 'Concreto, vidrio, piedra'], ['Fachada', 'Doble altura al paisaje'], ['Exterior', 'Terraza jardín']],
+      },
+      room1: {
+        name: 'Dormitorio infantil', kind: 'Interiorismo',
+        body: 'Un altillo con arcos separa el descanso del juego y la lectura, sin perder luz.',
+        specs: [['Programa', 'Cama alta, nicho, estudio'], ['Materiales', 'Madera, laca malva']],
+      },
+      room2: {
+        name: 'Dormitorio infantil', kind: 'Interiorismo · Mobiliario a medida',
+        body: 'El ventanal de piso a techo ilumina la doble altura; el clóset en arco repite el ritmo del altillo.',
+        specs: [['Mobiliario', 'Clóset y escalera a medida'], ['Muros', 'Listones de madera']],
+      },
+      plan: {
+        name: 'Complejo Minato · Planta 1F', kind: 'Desarrollo técnico',
+        body: 'Arena multiuso con recorridos separados para público, jugadores y personal alrededor de la cancha principal.',
+        specs: [['Programa', 'Arena, foyer, vestidores'], ['Accesos', '6 diferenciados'], ['Servicios', 'Estacionamiento sur y este']],
+      },
+      section: {
+        name: 'Complejo Minato · Corte', kind: 'Desarrollo técnico · Estructura',
+        body: 'Una cubierta de cerchas de acero salva la cancha sin apoyos intermedios; las graderías suben hasta los palcos.',
+        specs: [['Longitud', '68,7 m'], ['Altura', '21 m'], ['Cubierta', 'Cerchas de acero'], ['Aforo', 'Graderías y palcos VIP']],
+      },
+    },
   },
   services: {
     eyebrow: 'Servicios',
@@ -117,6 +146,34 @@ const en: Dictionary = {
     highlight: 'From idea to building',
     stat: '120+',
     statLabel: 'projects delivered',
+    gallery: {
+      title: 'GALLERY',
+      house: {
+        name: 'Hillside house', kind: 'Architecture · Housing',
+        body: 'A concrete roof that rises from the ground, shelters the stair and opens towards the valley.',
+        specs: [['Levels', '2'], ['Materials', 'Concrete, glass, stone'], ['Façade', 'Double height to the view'], ['Outside', 'Garden terrace']],
+      },
+      room1: {
+        name: 'Children’s bedroom', kind: 'Interior design',
+        body: 'An arched loft separates sleep from play and reading, without losing light.',
+        specs: [['Programme', 'Loft bed, nook, desk'], ['Materials', 'Wood, mauve lacquer']],
+      },
+      room2: {
+        name: 'Children’s bedroom', kind: 'Interior design · Bespoke furniture',
+        body: 'A floor-to-ceiling window lights the double height; the arched wardrobe echoes the loft’s rhythm.',
+        specs: [['Furniture', 'Bespoke wardrobe and ladder'], ['Walls', 'Timber slats']],
+      },
+      plan: {
+        name: 'Minato complex · Ground floor', kind: 'Technical design',
+        body: 'A multi-use arena with separate routes for the public, players and staff around the main court.',
+        specs: [['Programme', 'Arena, foyer, locker rooms'], ['Entrances', '6, by user'], ['Services', 'South and east parking']],
+      },
+      section: {
+        name: 'Minato complex · Section', kind: 'Technical design · Structure',
+        body: 'A steel-truss roof spans the court with no intermediate supports; the stands rise up to the boxes.',
+        specs: [['Length', '68.7 m'], ['Height', '21 m'], ['Roof', 'Steel trusses'], ['Seating', 'Stands and VIP boxes']],
+      },
+    },
   },
   services: {
     eyebrow: 'Services',

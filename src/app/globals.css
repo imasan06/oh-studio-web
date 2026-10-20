@@ -28,6 +28,7 @@
 
 html {
   background: var(--color-marfil);
+  scrollbar-width: none; /* no scrollbar: the page still scrolls */
   -webkit-text-size-adjust: 100%;
 }
 html.lenis, html.lenis body { height: auto; }
@@ -67,21 +68,6 @@ body {
     line-height: 1.3;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-  }
-
-  /* Barra vertical: marks the start of titles and sections, in the title's colour */
-  .bar {
-    position: relative;
-    padding-left: 0.42em;
-  }
-  .bar::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.16em;
-    bottom: 0.1em;
-    width: max(3px, 0.055em);
-    background: currentColor;
   }
 
   /* Krub italic: the highlighted word of a headline, subtitles and quotes */
@@ -158,3 +144,6 @@ body {
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+html, html.lenis, body { scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }

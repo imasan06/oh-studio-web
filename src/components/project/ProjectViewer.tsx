@@ -228,7 +228,7 @@ export default function ProjectViewer({ lang, slug, name, meta, model, t }: Prop
         <Link href={`/${lang}#proyectos`} onClick={back} className="label flex w-fit items-center gap-2 text-[11px] text-noche/60 hover:text-azul">
           <span className="punta rotate-90 text-[12px] text-azul" />{t.back}
         </Link>
-        <h1 className="bar text-[32px] font-bold leading-[1.02] tracking-[-0.025em] text-azul md:text-[42px]">{name}</h1>
+        <h1 className="text-[32px] font-bold leading-[1.02] tracking-[-0.025em] text-azul md:text-[42px]">{name}</h1>
         <p className="accent text-[18px] md:text-[20px]">{meta}</p>
       </div>
 

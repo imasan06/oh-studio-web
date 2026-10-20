@@ -17,10 +17,11 @@ export function Logo({ version = 'horizontal', tone = 'azul', height, className,
   return <Image src={f[tone]} alt={alt} width={Math.round(height * f.ratio)} height={height} className={className} priority={priority} unoptimized />;
 }
 
-/** A headline with its highlighted words: "Espacio *habitable*" → Inter Bold + Krub Italic (Manual · Jerarquía tipográfica). */
-export function rich(text: string): ReactNode {
+/** A headline with its highlighted words: "Espacio *habitable*" → Inter Bold + Krub Italic (Manual · Jerarquía tipográfica).
+ *  `mark` swaps the italic for another treatment, e.g. a softer colour in the same weight. */
+export function rich(text: string, mark = 'accent'): ReactNode {
   return text.split(/(\*[^*]+\*)/).map((part, i) =>
-    part.startsWith('*') && part.endsWith('*') ? <span key={i} className="accent">{part.slice(1, -1)}</span> : part,
+    part.startsWith('*') && part.endsWith('*') ? <span key={i} className={mark}>{part.slice(1, -1)}</span> : part,
   );
 }
 /** The same text without the markers, for attributes and metadata. */
